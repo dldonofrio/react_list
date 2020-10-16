@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Header from './components/layout/header'
+import Header from './components/layout/header';
 import Todos from './components/todos';
+import AddTodo from './components/addtodo';
 
 class App extends Component {
   state = {
@@ -23,6 +24,9 @@ class App extends Component {
     ]
   }
 
+  addTodo = (title) => {
+    
+  }
 
   markComplete = (id) => {
     this.setState({ todos: this.state.todos.map(todo => {
@@ -41,9 +45,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <h1>App</h1>
-          <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
+        <div className="container">
+          <Header />
+          <AddTodo addTodo={this.addTodo}/>
+          <h1>App</h1>
+            <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
+        </div>
       </div>
     );
   }
