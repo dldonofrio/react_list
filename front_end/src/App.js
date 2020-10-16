@@ -5,27 +5,18 @@ import AddTodo from './components/addtodo';
 import About from './components/pages/about'
 import { v4 as uuidv4 } from 'uuid';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import axios from 'axios';
 
 
 class App extends Component {
   state = {
-    todos: [
-      {
-        id: uuidv4(),
-        title: 'Take out the recyclables',
-        completed: false
-      },
-      {
-        id: uuidv4(),
-        title: 'Lunch with coworkers',
-        completed: false
-      },
-      {
-        id: uuidv4(),
-        title: 'Meeting with parents',
-        completed: false
-      }          
-    ]
+    todos: []
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/fetch')
+      .then(res => this.setState({ todos: res.data.data }))
+      // .then(res => console.log(res.data));
   }
 
   addTodo = (title) => {
