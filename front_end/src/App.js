@@ -21,7 +21,6 @@ class App extends Component {
 
   addTodo = (title) => {
     const newTodo = {
-      id: uuidv4(),
       title: title,
       complete: false
     }
