@@ -56,13 +56,23 @@ class App extends Component {
           if(todo.id === id) {
             todo.completed = !todo.completed
           }
-      return todo;
-    })}))
-    
+        return todo;
+      })
+    }))   
   }
 
   delTodo = (id) => {
-    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)]})
+    var todoId = {
+      id: id
+    }
+    console.log(todoId)
+    axios.post('http://localhost:5000/delete', todoId)
+    .then(res => 
+      this.setState({ 
+        todos: [...this.state.todos.filter(todo => 
+          todo.id !== id)]
+      })
+    ) 
   }
 
 

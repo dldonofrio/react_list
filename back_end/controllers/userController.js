@@ -24,6 +24,7 @@ exports.add = async (req, res) => {
 		var title = req.body.title;
 		var completed = req.body.completed
 		let item = await mysql.query("INSERT INTO list_items (title, completed) VALUES(?,?)", [title, completed])
+		console.log(item);
 		res.send({
 			status: 200,
 			message: 'list item added successfully'
@@ -46,6 +47,25 @@ exports.check = async (req, res) => {
 		res.send({
 			status: 200,
 			message: 'checkbox updated successfully'
+		})
+	} catch(e) {
+		console.log(e.message);
+		res.send({
+			status: 400,
+			message: e.message
+		})
+	}
+}
+
+exports.delete = async (req, res) => {
+	try {
+		var id = req.body.id;
+		let del = await mysql.query("DELETE FROM list_items WHERE id = ?", [id])
+		await mysql.end();
+		console.log(del);
+		res.send({
+			status: 200,
+			message: 'list item deleted successfully'
 		})
 	} catch(e) {
 		console.log(e.message);
