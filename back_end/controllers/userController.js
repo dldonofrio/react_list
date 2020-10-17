@@ -23,12 +23,17 @@ exports.add = async (req, res) => {
 	try {
 		var title = req.body.title;
 		var completed = req.body.completed
-		let item = await mysql.query("INSERT INTO list_items (title, completed) VALUES(?,?)", [title, completed])
-		console.log(item);
-		res.send({
-			status: 200,
-			message: 'list item added successfully'
+		await mysql.query("INSERT INTO list_items (title, completed) VALUES(?,?)", [title, completed], (err, row, fields) => {
+			if (err) throw error;
+			console.log(row.insertId);
+			console.log(fields)
+				res.send({
+					status: 200,
+					data: row.insertId,
+					message: 'list item added successfully'
+				})
 		})
+
 	} catch(e) {
 		console.log(e.message);
 		res.send({

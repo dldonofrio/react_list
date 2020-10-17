@@ -6,7 +6,6 @@ class TodoItem extends Component {
 
 
 	getTextStyle = () => {
-		console.log("o sole mio")
 		return {
 			textDecoration: this.props.todo.completed ?
 			'line-through' : 'none'
@@ -14,7 +13,6 @@ class TodoItem extends Component {
 	}
 
 	getCheckboxStyle = () => {
-		console.log("hee-haw")
 		if(this.props.todo.completed) {
 			return true
 		} else {

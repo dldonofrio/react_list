@@ -29,6 +29,11 @@ class App extends Component {
     }
 
     axios.post('http://localhost:5000/add', newTodo)
+    .then( (res) => {
+      newTodo.id = res.data.data;
+      console.log(res.data.data);
+      console.log(newTodo);
+    })
     .then(res => 
       this.setState(
         { 
