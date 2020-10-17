@@ -20,7 +20,7 @@ exports.fetch = async (req, res) => {
 }
 
 exports.add = async (req, res) => {
-	try{
+	try {
 		var title = req.body.title;
 		var completed = req.body.completed
 		let item = await mysql.query("INSERT INTO list_items (title, completed) VALUES(?,?)", [title, completed])
@@ -29,7 +29,25 @@ exports.add = async (req, res) => {
 			message: 'list item added successfully'
 		})
 	} catch(e) {
-		console.log("nono")
+		console.log(e.message);
+		res.send({
+			status: 400,
+			message: e.message
+		})
+	}
+}
+
+exports.check = async (req, res) => {
+	try {
+		var id = req.body.id;
+		let check = await mysql.query("UPDATE list_items SET completed = !completed WHERE id = ?", [id])
+		await mysql.end()
+		console.log(check);
+		res.send({
+			status: 200,
+			message: 'checkbox updated successfully'
+		})
+	} catch(e) {
 		console.log(e.message);
 		res.send({
 			status: 400,

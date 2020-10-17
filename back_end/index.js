@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 
 app.get('/fetch', userController.fetch);
 app.post('/add', userController.add);
+app.post('/check', userController.check);
 // app.post('/submit', userController.submit);
 
 

@@ -23,13 +23,14 @@ class App extends Component {
   }
 
   addTodo = (title) => {
-    const newTodo = {
+    var newTodo = {
       title: title,
       completed: false
     }
 
     axios.post('http://localhost:5000/add', newTodo)
-    .then(res => this.setState(
+    .then(res => 
+      this.setState(
         { 
           todos: [...this.state.todos, newTodo] 
         }
@@ -43,12 +44,21 @@ class App extends Component {
   }
 
   markComplete = (id) => {
-    this.setState({ todos: this.state.todos.map(todo => {
-      if(todo.id === id) {
-        todo.completed = !todo.completed
-      }
+
+    var todoId = {
+      id: id
+    }
+
+    axios.post('http://localhost:5000/check', todoId)
+    .then(res =>
+      this.setState({ 
+        todos: this.state.todos.map(todo => {
+          if(todo.id === id) {
+            todo.completed = !todo.completed
+          }
       return todo;
-    })})
+    })}))
+    
   }
 
   delTodo = (id) => {
