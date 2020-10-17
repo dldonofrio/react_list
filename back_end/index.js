@@ -7,8 +7,11 @@ var port = 5000
 var userController = require('./controllers/userController');
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 
 app.get('/fetch', userController.fetch);
+app.post('/add', userController.add);
 // app.post('/submit', userController.submit);
 
 

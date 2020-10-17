@@ -15,16 +15,31 @@ class App extends Component {
 
   componentDidMount() {
     axios.get('http://localhost:5000/fetch')
-      .then(res => this.setState({ todos: res.data.data }))
+    .then(res => this.setState({ todos: res.data.data }))
       // .then(res => console.log(res.data));
+    .catch(function (e) {
+      console.log(e);
+    })
   }
 
   addTodo = (title) => {
     const newTodo = {
       title: title,
-      complete: false
+      completed: false
     }
-    this.setState({ todos: [...this.state.todos, newTodo] })
+
+    axios.post('http://localhost:5000/add', newTodo)
+    .then(res => this.setState(
+        { 
+          todos: [...this.state.todos, newTodo] 
+        }
+      )
+    )
+    .catch(function (e) {
+      console.log(e);
+    })
+
+    // this.setState({ todos: [...this.state.todos, newTodo] })
   }
 
   markComplete = (id) => {
